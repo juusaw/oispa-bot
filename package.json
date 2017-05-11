@@ -1,0 +1,10 @@
+{
+  "name": "oispa-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Juuso Mikkonen <juuso.mikkonen@aalto.fi>",
+  "license": "MIT",
+  "dependencies": {
+    "twit": "^2.2.5"
+  }
+}
