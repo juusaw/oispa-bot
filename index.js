@@ -39,11 +39,10 @@ function post(text) {
 }
 
 exports.handler = function() {
-  search().then(filterData)
+  return search().then(filterData)
           .then(getOne)
           .then(r => r.text)
           .then(post)
           .then(res => res.data.text)
-          .then(console.log)
           .catch(console.log);
 }
