@@ -4,7 +4,11 @@
   "main": "index.js",
   "author": "Juuso Mikkonen <juuso.mikkonen@aalto.fi>",
   "license": "MIT",
+  "scripts": {
+    "start": "export AWS_PROFILE=oispa && node index.js"
+  },
   "dependencies": {
+    "aws-sdk": "^2.50.0",
     "twit": "^2.2.5"
   }
 }
