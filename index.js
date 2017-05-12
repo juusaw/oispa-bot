@@ -1,7 +1,11 @@
 const twit = require('twit');
+const AWS = require('aws-sdk');
 const config = require('./config.js');
 
 const Twitter = new twit(config);
+const DB = new AWS.DynamoDB();
+
+const tableName = 'oispa-tweet';
 
 const keyword = 'oispa';
 const amount = 100;
@@ -34,15 +38,28 @@ function getOne(array) {
   return array[Math.floor((Math.random() * array.length))];
 }
 
-function post(text) {
-  return Twitter.post('statuses/update', { status: text })
+function post(tweet) {
+  return Twitter.post('statuses/update', { status: tweet.text })
+}
+
+function addToDB(tweet) {
+  const params = {
+    TableName: tableName,
+    Item: {
+        Id: tweet.id_str,
+        Text: tweet.text,
+        Author: tweet.user.name,
+        TimeAdded: +new Date
+    }
+  };
+  db.put(params);
 }
 
 exports.handler = function() {
   return search().then(filterData)
           .then(getOne)
-          .then(r => r.text)
-          .then(post)
+//          .then(post)
+          .then(addToDB)
           .then(res => res.data.text)
           .catch(console.log);
 }
