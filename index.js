@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 const config = require('./config.js');
 
 const Twitter = new twit(config);
-const DB = new AWS.DynamoDB();
+const DB = new AWS.DynamoDB({ region: 'eu-west-1' });
 
 const tableName = 'oispa-tweet';
 
@@ -30,8 +30,8 @@ function search() {
   return Twitter.get('search/tweets', { q: keyword, count: amount });
 }
 
-function filterData(data) {
-  return data.data.statuses.filter(predicate);
+function filterData(response) {
+  return response.data.statuses.filter(predicate);
 }
 
 function getOne(array) {
@@ -39,27 +39,27 @@ function getOne(array) {
 }
 
 function post(tweet) {
-  return Twitter.post('statuses/update', { status: tweet.text })
+  return Twitter.post('statuses/update', { status: tweet.text }).then(_ => tweet);
 }
 
 function addToDB(tweet) {
   const params = {
     TableName: tableName,
     Item: {
-        Id: tweet.id_str,
-        Text: tweet.text,
-        Author: tweet.user.name,
-        TimeAdded: +new Date
+        Id:        { S: tweet.id_str },
+        Text:      { S: tweet.text },
+        Author:    { S: tweet.user.name },
+        TimeAdded: { N: (+new Date).toString() }
     }
   };
-  db.put(params);
+  return DB.putItem(params).promise().then(_ => tweet);
 }
 
 exports.handler = function() {
   return search().then(filterData)
           .then(getOne)
-//          .then(post)
+          .then(post)
           .then(addToDB)
-          .then(res => res.data.text)
-          .catch(console.log);
+          .then(res => res.text)
+          .catch(console.error);
 }
