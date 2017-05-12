@@ -5,7 +5,8 @@
   "author": "Juuso Mikkonen <juuso.mikkonen@aalto.fi>",
   "license": "MIT",
   "scripts": {
-    "start": "export AWS_PROFILE=oispa && node index.js"
+    "start": "export AWS_PROFILE=oispa && node index.js",
+    "tweet": "export AWS_PROFILE=oispa && node local.js"
   },
   "dependencies": {
     "aws-sdk": "^2.50.0",

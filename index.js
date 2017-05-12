@@ -55,7 +55,7 @@ function addToDB(tweet) {
   return DB.putItem(params).promise().then(_ => tweet);
 }
 
-exports.handler = function() {
+function lambda() {
   return search().then(filterData)
           .then(getOne)
           .then(post)
@@ -63,3 +63,6 @@ exports.handler = function() {
           .then(res => res.text)
           .catch(console.error);
 }
+
+exports.handler = lambda;
+module.exports  = lambda;
