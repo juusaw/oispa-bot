@@ -59,11 +59,11 @@ function addToDB(tweet) {
   return DB.putItem(params).promise().then(_ => tweet);
 }
 
-exports.handler = function() {
+exports.handler = function(event, context, callback) {
   return search().then(filterData)
           .then(getOne)
           .then(post)
           .then(addToDB)
-          .then(res => res.text)
-          .catch(console.error);
+          .then(res => callback(null, res.text))
+          .catch(err => callback(err));
 }
