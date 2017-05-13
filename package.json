@@ -6,12 +6,13 @@
   "license": "MIT",
   "scripts": {
     "start": "export AWS_PROFILE=oispa && node index.js",
-    "tweet": "export AWS_PROFILE=oispa && node local.js"
+    "tweet": "export AWS_PROFILE=oispa && lambda-local -l index.js -h handler -e event.js -t 10"
   },
   "dependencies": {
     "twit": "^2.2.5"
   },
   "devDependencies": {
+    "lambda-local": "^1.4.2",
     "aws-sdk": "^2.50.0"
   }
 }

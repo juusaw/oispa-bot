@@ -67,6 +67,3 @@ exports.handler = function() {
           .then(res => res.text)
           .catch(console.error);
 }
-
-exports.handler = lambda;
-module.exports  = lambda;
