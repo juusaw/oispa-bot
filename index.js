@@ -52,14 +52,14 @@ function addToDB(tweet) {
     Item: {
         Id:        { S: tweet.id_str },
         Text:      { S: tweet.text },
-        Author:    { S: tweet.user.name },
+        Author:    { S: tweet.user.screen_name },
         TimeAdded: { N: (+new Date).toString() }
     }
   };
   return DB.putItem(params).promise().then(_ => tweet);
 }
 
-function lambda() {
+exports.handler = function() {
   return search().then(filterData)
           .then(getOne)
           .then(post)
