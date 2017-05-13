@@ -6,7 +6,7 @@ const Twitter = new twit(config);
 const DB = new AWS.DynamoDB({ region: 'eu-west-1' });
 
 const tableName = 'oispa-tweet';
-
+const botName = 'oispabot';
 const keyword = 'oispa';
 const amount = 100;
 
@@ -21,6 +21,10 @@ function predicate(item) {
   }
   // Has no user mentions
   if (item.text.search('@') >= 0) {
+    return false;
+  }
+  // Tweet is not by the bot itself
+  if (item.user.screen_name === botName) {
     return false;
   }
   return true;
