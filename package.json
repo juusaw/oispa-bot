@@ -9,7 +9,9 @@
     "tweet": "export AWS_PROFILE=oispa && node local.js"
   },
   "dependencies": {
-    "aws-sdk": "^2.50.0",
     "twit": "^2.2.5"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.50.0"
   }
 }
