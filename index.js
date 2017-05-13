@@ -6,7 +6,7 @@ const Twitter = new twit(config);
 const DB = new AWS.DynamoDB({ region: 'eu-west-1' });
 
 const tableName = 'oispa-tweet';
-
+const botName = 'oispabot';
 const keyword = 'oispa';
 const amount = 100;
 
@@ -21,6 +21,10 @@ function predicate(item) {
   }
   // Has no user mentions
   if (item.text.search('@') >= 0) {
+    return false;
+  }
+  // Tweet is not by the bot itself
+  if (item.user.screen_name === botName) {
     return false;
   }
   return true;
@@ -48,18 +52,18 @@ function addToDB(tweet) {
     Item: {
         Id:        { S: tweet.id_str },
         Text:      { S: tweet.text },
-        Author:    { S: tweet.user.name },
+        Author:    { S: tweet.user.screen_name },
         TimeAdded: { N: (+new Date).toString() }
     }
   };
   return DB.putItem(params).promise().then(_ => tweet);
 }
 
-exports.handler = function() {
+exports.handler = function(event, context, callback) {
   return search().then(filterData)
           .then(getOne)
           .then(post)
           .then(addToDB)
-          .then(res => res.text)
-          .catch(console.error);
+          .then(res => callback(null, res.text))
+          .catch(err => callback(err));
 }
