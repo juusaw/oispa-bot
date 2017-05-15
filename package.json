@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "export AWS_PROFILE=oispa && node index.js",
-    "tweet": "export AWS_PROFILE=oispa && lambda-local -l index.js -h handler -e event.js -t 10"
+    "tweet": "export AWS_PROFILE=oispa && lambda-local -l index.js -h handler -e event.js -t 10",
+    "deploy": "bash aws.sh deploy"
   },
   "dependencies": {
     "twit": "^2.2.5"
