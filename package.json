@@ -10,7 +10,8 @@
     "deploy": "bash aws.sh deploy"
   },
   "dependencies": {
-    "twit": "^2.2.5"
+    "dotenv": "6.1.0",
+    "twit": "2.2.11"
   },
   "devDependencies": {
     "lambda-local": "^1.4.2",
