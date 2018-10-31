@@ -1,13 +1,20 @@
 const twit = require('twit');
 const AWS = require('aws-sdk');
-const config = require('./config.js');
+require('dotenv').config()
 
-const Twitter = new twit(config);
+const twitterConfig = {
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_KEY,
+  access_token: process.env.TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+};
+
+const Twitter = new twit(twitterConfig);
 const DB = new AWS.DynamoDB({ region: 'eu-west-1' });
 
 const tableName = 'oispa-tweet';
-const botName = 'oispabot';
-const keyword = 'oispa';
+const botName = process.env.BOT_NAME;
+const keyword = process.env.KEYWORD;
 const amount = 100;
 
 function predicate(item) {
@@ -47,6 +54,9 @@ function post(tweet) {
 }
 
 function addToDB(tweet) {
+  if (!process.env.USE_DB) {
+    return tweet
+  }
   const params = {
     TableName: tableName,
     Item: {
