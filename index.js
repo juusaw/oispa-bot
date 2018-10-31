@@ -50,7 +50,7 @@ function getOne(array) {
 }
 
 function post(tweet) {
-  return Twitter.post('statuses/update', { status: tweet.text }).then(_ => tweet);
+  return Twitter.post('statuses/update', { status: unescape(tweet.text) }).then(_ => tweet);
 }
 
 function addToDB(tweet) {
