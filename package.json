@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "dotenv": "6.1.0",
-    "twit": "2.2.11"
+    "twit": "2.2.11",
+    "unescape": "^1.0.1"
   },
   "devDependencies": {
-    "lambda-local": "^1.4.2",
-    "aws-sdk": "^2.50.0"
+    "aws-sdk": "^2.50.0",
+    "lambda-local": "^1.4.2"
   }
 }
