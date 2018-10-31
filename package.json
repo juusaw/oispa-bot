@@ -1,8 +1,9 @@
 {
   "name": "oispa-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "repository": "juusaw/oispa-bot",
   "main": "index.js",
-  "author": "Juuso Mikkonen <juuso.mikkonen@aalto.fi>",
+  "author": "Juuso Mikkonen <hello@juusomikkonen.com>",
   "license": "MIT",
   "scripts": {
     "start": "export AWS_PROFILE=oispa && node index.js",
@@ -12,7 +13,7 @@
   "dependencies": {
     "dotenv": "6.1.0",
     "twit": "2.2.11",
-    "unescape": "^1.0.1"
+    "unescape": "1.0.1"
   },
   "devDependencies": {
     "aws-sdk": "^2.50.0",

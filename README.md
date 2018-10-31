@@ -6,15 +6,18 @@ Tweets with handle [@oispa](https://twitter.com/oispabot).
 
 ## Built with
 
-- Plain old Javascript
+- Plain old Javascript (Node.js)
 - AWS Lambda serverless functions
 - DynamoDB
 
 # TODO
 
-- Fix character encoding problems in posted tweets
 - Make more configurable
 
 ## Contributing
 
 - PRs welcome
+
+## Changelog
+
+- See [releases](https://github.com/juusaw/oispa-bot/releases)
