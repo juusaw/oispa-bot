@@ -10,6 +10,11 @@ Tweets with handle [@oispa](https://twitter.com/oispabot).
 - AWS Lambda serverless functions
 - DynamoDB
 
+# TODO
+
+- Fix character encoding problems in posted tweets
+- Make more configurable
+
 ## Contributing
 
 - PRs welcome
